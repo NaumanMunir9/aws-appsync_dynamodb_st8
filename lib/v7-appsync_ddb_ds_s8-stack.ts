@@ -52,7 +52,7 @@ export class V7AppsyncDdbDsS8Stack extends cdk.Stack {
       responseMappingTemplate: appsync.MappingTemplate.dynamoDbResultItem(),
     });
 
-    // Mutation => u[dateNote
+    // Mutation => updateNote
     datasource.createResolver({
       typeName: "Mutation",
       fieldName: "updateNote",
