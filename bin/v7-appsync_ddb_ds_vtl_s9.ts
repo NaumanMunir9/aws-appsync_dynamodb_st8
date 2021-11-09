@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from '@aws-cdk/core';
-import { V7AppsyncDdbDsS8Stack } from '../lib/v7-appsync_ddb_ds_s8-stack';
+import { V7AppsyncDdbDsVtlS9Stack } from '../lib/v7-appsync_ddb_ds_vtl_s9-stack';
 
 const app = new cdk.App();
-new V7AppsyncDdbDsS8Stack(app, 'V7AppsyncDdbDsS8Stack', {
+new V7AppsyncDdbDsVtlS9Stack(app, 'V7AppsyncDdbDsVtlS9Stack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */

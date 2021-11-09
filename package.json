@@ -1,8 +1,8 @@
 {
-  "name": "v7-appsync_ddb_ds_s8",
+  "name": "v7-appsync_ddb_ds_vtl_s9",
   "version": "0.1.0",
   "bin": {
-    "v7-appsync_ddb_ds_s8": "bin/v7-appsync_ddb_ds_s8.js"
+    "v7-appsync_ddb_ds_vtl_s9": "bin/v7-appsync_ddb_ds_vtl_s9.js"
   },
   "scripts": {
     "build": "tsc",
