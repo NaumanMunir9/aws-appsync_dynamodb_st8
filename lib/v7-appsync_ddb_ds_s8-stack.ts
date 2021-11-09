@@ -29,7 +29,49 @@ export class V7AppsyncDdbDsS8Stack extends cdk.Stack {
       writeCapacity: 1,
     });
 
-    // AppSync is taking DynamoDB Table as a DataSource
+    // Attaching DynamoDB Table as a DataSource to AppSync API
     const datasource = api.addDynamoDbDataSource("datasource", ddbTable);
+
+    // Resolvers
+    // Query => Notes
+    datasource.createResolver({
+      typeName: "Query",
+      fieldName: "notes",
+      requestMappingTemplate: appsync.MappingTemplate.dynamoDbScanTable(),
+      responseMappingTemplate: appsync.MappingTemplate.dynamoDbResultList(),
+    });
+
+    // Mutation => createNote
+    datasource.createResolver({
+      typeName: "Mutation",
+      fieldName: "createNote",
+      requestMappingTemplate: appsync.MappingTemplate.dynamoDbPutItem(
+        appsync.PrimaryKey.partition("id").auto(),
+        appsync.Values.projecting()
+      ),
+      responseMappingTemplate: appsync.MappingTemplate.dynamoDbResultItem(),
+    });
+
+    // Mutation => u[dateNote
+    datasource.createResolver({
+      typeName: "Mutation",
+      fieldName: "updateNote",
+      requestMappingTemplate: appsync.MappingTemplate.dynamoDbPutItem(
+        appsync.PartitionKey.partition("id").is("id"),
+        appsync.Values.projecting()
+      ),
+      responseMappingTemplate: appsync.MappingTemplate.dynamoDbResultItem(),
+    });
+
+    // Mutation => deleteNote
+    datasource.createResolver({
+      typeName: "Mutation",
+      fieldName: "deleteNote",
+      requestMappingTemplate: appsync.MappingTemplate.dynamoDbDeleteItem(
+        "id",
+        "id"
+      ),
+      responseMappingTemplate: appsync.MappingTemplate.dynamoDbResultItem(),
+    });
   }
 }
