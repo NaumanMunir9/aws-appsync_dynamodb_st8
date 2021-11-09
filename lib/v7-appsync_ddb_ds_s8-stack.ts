@@ -18,6 +18,7 @@ export class V7AppsyncDdbDsS8Stack extends cdk.Stack {
       },
     });
 
+    // dynamoDB Table
     const ddbTable = new ddb.Table(this, "ddbtable", {
       tableName: "step8table",
       partitionKey: {
@@ -27,5 +28,8 @@ export class V7AppsyncDdbDsS8Stack extends cdk.Stack {
       readCapacity: 1,
       writeCapacity: 1,
     });
+
+    // AppSync is taking DynamoDB Table as a DataSource
+    const datasource = api.addDynamoDbDataSource("datasource", ddbTable);
   }
 }
